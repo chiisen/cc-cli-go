@@ -57,6 +57,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 							lastMsg.Content[i].Text += event.Delta
 						}
 					}
+					m.session.Save()
 				}
 			}
 			m.viewport.SetContent(m.renderMessages())
@@ -65,6 +66,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case QueryResultMsg:
 		m.loading = false
+		m.session.Save()
 		return m, nil
 	}
 
@@ -106,11 +108,14 @@ func (m Model) submitInput() (tea.Model, tea.Cmd) {
 	text := m.input.Value()
 	m.input.SetValue("")
 
-	m.messages = append(m.messages, types.NewUserMessage(text))
+	userMsg := types.NewUserMessage(text)
+	m.messages = append(m.messages, userMsg)
+	m.session.AddMessage(userMsg)
 
 	assistantMsg := types.NewAssistantMessage()
 	assistantMsg.Content = []types.ContentBlock{{Type: "text", Text: ""}}
 	m.messages = append(m.messages, assistantMsg)
+	m.session.AddMessage(assistantMsg)
 
 	m.viewport.SetContent(m.renderMessages())
 	m.loading = true
@@ -125,6 +130,8 @@ func (m Model) submitInput() (tea.Model, tea.Cmd) {
 	}
 
 	m.eventChan, m.resultChan = m.QueryEngine.Query(m.ctx, params)
+
+	m.session.Save()
 
 	return m, m.waitForEvents()
 }

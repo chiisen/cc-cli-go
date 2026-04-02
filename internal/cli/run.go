@@ -9,6 +9,7 @@ import (
 
 	"github.com/liao-eli/cc-cli-go/internal/api"
 	"github.com/liao-eli/cc-cli-go/internal/query"
+	"github.com/liao-eli/cc-cli-go/internal/session"
 	"github.com/liao-eli/cc-cli-go/internal/tools"
 	"github.com/liao-eli/cc-cli-go/internal/tools/bash"
 	"github.com/liao-eli/cc-cli-go/internal/tools/edit"
@@ -25,8 +26,13 @@ var runCmd = &cobra.Command{
 	RunE:  runInteractive,
 }
 
+var continueFlag bool
+var resumeFlag string
+
 func init() {
 	rootCmd.AddCommand(runCmd)
+	runCmd.Flags().BoolVarP(&continueFlag, "continue", "c", false, "Continue last session")
+	runCmd.Flags().StringVar(&resumeFlag, "resume", "", "Resume specific session by ID")
 }
 
 func runInteractive(cmd *cobra.Command, args []string) error {
@@ -47,7 +53,27 @@ func runInteractive(cmd *cobra.Command, args []string) error {
 
 	engine := query.NewEngine(client, toolReg)
 
-	model := tui.InitialModel()
+	var model tui.Model
+	if continueFlag || resumeFlag != "" {
+		var sess *session.Session
+		var err error
+
+		if resumeFlag != "" {
+			sess, err = session.LoadSession(resumeFlag)
+		} else {
+			sess, err = session.GetLastSession()
+		}
+
+		if err != nil {
+			fmt.Printf("Warning: Could not resume session: %v\n", err)
+			model = tui.InitialModel()
+		} else {
+			model = tui.InitialModelWithSession(sess)
+		}
+	} else {
+		model = tui.InitialModel()
+	}
+
 	model.QueryEngine = engine
 
 	p := tea.NewProgram(model)

@@ -25,6 +25,11 @@
 - [x] Context Building / 環境建構 (Git 狀態、分支、工作目錄、日期時間)
 - [x] CLAUDE.md Discovery / CLAUDE.md 發現 (自動載入 CLAUDE.md/GEMINI.md)
 
+**Phase 1.6: 會話管理 / Session Management**
+
+- [x] Session Storage / 會話儲存 (JSONL 格式對話持久化)
+- [x] Resume Functionality / 恢復功能 (-c/--continue, --resume <session-id>)
+
 **Phase 2: TUI (基本) / Basic TUI**
 
 - [x] Basic TUI / 基本 TUI (Bubble Tea framework / Bubble Tea 框架)
@@ -82,19 +87,14 @@
 
 #### Session Storage 會話儲存
 
-- [ ] **Session Storage / 會話儲存**
+- [x] **Session Storage / 會話儲存** ✅
   - 功能: Conversation persistence / 對話持久化
-  - 預估工時 / Est. Hours: 3-4h
-  - 位置: `internal/session/`
-  - 子任務 / Subtasks:
-    - [ ] Session ID generation / Session ID 生成
-    - [ ] Transcript storage (JSONL format) / Transcript 儲存 (JSONL 格式)
-    - [ ] Session metadata / Session 元資料
-    - [ ] Session cleanup (old sessions) / Session 清理
+  - 實作位置: `internal/session/session.go`
+  - 特性: Session ID 生成、JSONL 格式儲存、元資料管理、自動清理舊會話
 
-- [ ] **Resume Functionality / 恢復功能**
+- [x] **Resume Functionality / 恢復功能** ✅
   - 功能: Continue previous sessions / 繼續之前的會話
-  - 預估工時 / Est. Hours: 1h
+  - 實作位置: `internal/cli/run.go`
   - CLI flags:
     - `-c` / `--continue`: Continue last session / 繼續上次會話
     - `--resume <session-id>`: Resume specific session / 恢復指定會話
@@ -185,10 +185,10 @@
 
 | 項目 / Item | 數量 / Count |
 |-------------|-------------|
-| 已完成 / Completed | 17 |
-| 待實作 (P0) / Pending (P0) | 3 主要任務 / main tasks |
+| 已完成 / Completed | 19 |
+| 待實作 (P0) / Pending (P0) | 1 主要任務 / main tasks |
 | 待實作 (P1/P2) / Pending (P1/P2) | 5 主要任務 / main tasks |
-| 完成率 / Completion Rate | ~77% |
+| 完成率 / Completion Rate | ~79% |
 
 ---
 
@@ -199,14 +199,9 @@
 1. Permission System / 權限系統 (4-5h)
 2. Permission Dialog / 權限對話框 (3-4h)
 
-### Sprint 4: 會話管理 / Session Management
-
-3. Session Storage / 會話儲存 (3-4h)
-4. Resume Functionality / 恢復功能 (1h)
-
 ### Sprint 5: TUI 增強 / TUI Enhancement
 
-5. Input Handling /輸入處理 (3-4h)
+3. Input Handling /輸入處理 (3-4h)
 
 ---
 

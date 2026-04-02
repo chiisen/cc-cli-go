@@ -10,6 +10,7 @@ import (
 
 	envctx "github.com/liao-eli/cc-cli-go/internal/context"
 	"github.com/liao-eli/cc-cli-go/internal/query"
+	"github.com/liao-eli/cc-cli-go/internal/session"
 	"github.com/liao-eli/cc-cli-go/internal/types"
 )
 
@@ -30,6 +31,7 @@ type Model struct {
 	cancel context.CancelFunc
 
 	contextInfo *envctx.ContextInfo
+	session     *session.Session
 }
 
 func InitialModel() Model {
@@ -54,7 +56,15 @@ func InitialModel() Model {
 		ctx:         ctx,
 		cancel:      cancel,
 		contextInfo: contextInfo,
+		session:     session.NewSession(contextInfo.WorkingDir),
 	}
+}
+
+func InitialModelWithSession(sess *session.Session) Model {
+	m := InitialModel()
+	m.session = sess
+	m.messages = sess.Messages
+	return m
 }
 
 func (m Model) Init() tea.Cmd {

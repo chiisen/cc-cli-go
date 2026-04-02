@@ -20,6 +20,12 @@
 - **Context Building**: 自動收集環境資訊（工作目錄、Git 狀態、Git 分支、日期時間），並加入 system prompt。
 - **CLAUDE.md Discovery**: 自動從當前目錄向上搜尋 CLAUDE.md 和 GEMINI.md 檔案，並合併至 system prompt。
 
+#### 會話管理 / Session Management
+
+- **Session Storage**: 會話持久化功能，支援 JSONL 格式儲存對話記錄與元資料。
+- **Resume Functionality**: 恢復會話功能，支援 `-c` / `--continue` 繼續上次會話，`--resume <session-id>` 恢復指定會話。
+- **Session Cleanup**: 自動清理舊會話功能。
+
 ## [0.1.0] - 2026-04-01
 
 ### 新增功能 / Added
