@@ -248,32 +248,32 @@ User Input → TUI (Bubble Tea) → Query Engine → API Client → Claude API
 
 Potential features for future development / 未來開發的潛在功能：
 
-### Core Tools (P0 - Required) / 核心工具 (P0 - 必要)
+### Core Tools (P0 - Required) / 核心工具 (P0 - 必要) ✅
 
-- [ ] **Write Tool / Write 工具** - Create new files / 建立新檔案
-- [ ] **Glob Tool / Glob 工具** - File pattern matching / 檔案模式匹配
-- [ ] **Grep Tool / Grep 工具** - Search file contents / 搜尋檔案內容
-- [ ] **Permission System / 權限系統** - Tool approval dialogs / 工具核准對話框
+- [x] **Write Tool / Write 工具** - Create new files / 建立新檔案
+- [x] **Glob Tool / Glob 工具** - File pattern matching / 檔案模式匹配
+- [x] **Grep Tool / Grep 工具** - Search file contents / 搜尋檔案內容
+- [x] **Permission System / 權限系統** - Tool approval dialogs / 工具核准對話框
 
-### Context & Session (P0 - Required) / 環境與會話 (P0 - 必要)
+### Context & Session (P0 - Required) / 環境與會話 (P0 - 必要) ✅
 
-- [ ] **Context Building / 環境建構** - Git status, branch, cwd / Git 狀態、分支、當前目錄
-- [ ] **CLAUDE.md Discovery / CLAUDE.md 發現** - Automatic context loading / 自動載入環境
-- [ ] **Session Storage / 會話儲存** - Conversation persistence / 對話持久化
-- [ ] **Resume Functionality / 恢復功能** - `-c`, `--resume` flags / `-c`, `--resume` 參數
+- [x] **Context Building / 環境建構** - Git status, branch, cwd / Git 狀態、分支、當前目錄
+- [x] **CLAUDE.md Discovery / CLAUDE.md 發現** - Automatic context loading / 自動載入環境
+- [x] **Session Storage / 會話儲存** - Conversation persistence / 對話持久化
+- [x] **Resume Functionality / 恢復功能** - `-c`, `--resume` flags / `-c`, `--resume` 參數
 
-### TUI Enhancement (P0 - Required) / TUI 增強 (P0 - 必要)
+### TUI Enhancement (P0 - Required) / TUI 增強 (P0 - 必要) ✅
 
-- [ ] **Permission Dialog / 權限對話框** - Allow/Deny buttons / 允許/拒絕按鈕
-- [ ] **Input Handling /輸入處理** - Multi-line, history navigation / 多行輸入、歷史導航
-- ✅ **Keyboard Shortcuts / 鍵盤快捷鍵** (Ctrl+C, Ctrl+D, Escape)
+- [x] **Permission Dialog / 權限對話框** - Allow/Deny buttons / 允許/拒絕按鈕
+- [x] **Input Handling / 輸入處理** - Multi-line, history navigation / 多行輸入、歷史導航
+- [x] **Keyboard Shortcuts / 鍵盤快捷鍵** - Ctrl+C, Ctrl+D, Escape
 
-### Advanced Features (P1/P2 - Optional) /進階功能 (P1/P2 - 可選)
+### Advanced Features (P1/P2 - Optional) / 進階功能 (P1/P2 - 可選) ✅
 
-- [ ] **Context Compaction / 環境壓縮** - Auto-compact when context exceeds threshold / 自動壓縮
-- [ ] **Configuration Management / 設定管理** - settings files / 設定檔管理
-- [ ] **Comprehensive Test Suite / 完整測試套件** - Unit and integration tests / 單元與整合測試
-- [ ] **Improved Error Handling / 增強錯誤處理** - Better error messages / 更好的錯誤訊息
+- [x] **Context Compaction / 環境壓縮** - Auto-compact when context exceeds threshold / 自動壓縮
+- [x] **Configuration Management / 設定管理** - settings files / 設定檔管理
+- [x] **Comprehensive Test Suite / 完整測試套件** - Unit and integration tests / 單元與整合測試
+- [x] **Improved Error Handling / 增強錯誤處理** - Better error messages / 更好的錯誤訊息
 
 > See `TODO.md` for detailed task tracking. / 詳細任務追蹤請見 `TODO.md`。
 
