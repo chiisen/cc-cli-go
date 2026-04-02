@@ -119,7 +119,7 @@ func (m Model) submitInput() (tea.Model, tea.Cmd) {
 
 	params := query.QueryParams{
 		Messages:     m.messages[:len(m.messages)-1],
-		SystemPrompt: []string{"You are a helpful coding assistant."},
+		SystemPrompt: []string{"You are a helpful coding assistant.\n\n" + m.contextInfo.ToSystemPrompt()},
 		Model:        api.DefaultModel,
 		MaxTokens:    api.DefaultMaxTokens,
 	}

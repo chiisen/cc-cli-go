@@ -15,6 +15,11 @@
 - **Glob Tool**: 檔案模式匹配工具，支援 glob 模式搜尋（如 `**/*.go`），返回匹配的檔案列表。
 - **Grep Tool**: 檔案內容搜尋工具，支援正則表達式搜尋，支援檔案類型過濾（如 `*.go`）。
 
+#### 環境建構 / Context Building
+
+- **Context Building**: 自動收集環境資訊（工作目錄、Git 狀態、Git 分支、日期時間），並加入 system prompt。
+- **CLAUDE.md Discovery**: 自動從當前目錄向上搜尋 CLAUDE.md 和 GEMINI.md 檔案，並合併至 system prompt。
+
 ## [0.1.0] - 2026-04-01
 
 ### 新增功能 / Added

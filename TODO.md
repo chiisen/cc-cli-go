@@ -20,6 +20,11 @@
 - [x] Glob Tool / Glob 工具 (File pattern matching / 檔案模式匹配)
 - [x] Grep Tool / Grep 工具 (Search file contents / 搜尋檔案內容 - 支援正則表達式)
 
+**Phase 1.5: 環境建構 / Context Building**
+
+- [x] Context Building / 環境建構 (Git 狀態、分支、工作目錄、日期時間)
+- [x] CLAUDE.md Discovery / CLAUDE.md 發現 (自動載入 CLAUDE.md/GEMINI.md)
+
 **Phase 2: TUI (基本) / Basic TUI**
 
 - [x] Basic TUI / 基本 TUI (Bubble Tea framework / Bubble Tea 框架)
@@ -65,23 +70,15 @@
 
 #### Context Building 環境建構
 
-- [ ] **Context Building / 環境建構**
+- [x] **Context Building / 環境建構** ✅
   - 功能: Build context for API requests / 環境資訊建構
-  - 預估工時 / Est. Hours: 2-3h
-  - 位置: `internal/context/`
-  - 子任務 / Subtasks:
-    - [ ] Git status (`git status --porcelain`) / Git 狀態
-    - [ ] Git branch (`git branch --show-current`) / Git 分支
-    - [ ] Current working directory / 當前工作目錄
-    - [ ] Date/time / 日期時間
+  - 實作位置: `internal/context/context.go`
+  - 特性: Git 狀態、Git 分支、工作目錄、日期時間
 
-- [ ] **CLAUDE.md Discovery / CLAUDE.md 發現**
+- [x] **CLAUDE.md Discovery / CLAUDE.md 發現** ✅
   - 功能: Automatic context loading / 自動載入環境
-  - 預估工時 / Est. Hours: 1h
-  - 位置: `internal/context/claudemd.go`
-  - 子任務 / Subtasks:
-    - [ ] Search from current directory upward / 從當前目錄向上搜尋
-    - [ ] Merge all found CLAUDE.md files / 合併所有找到的檔案
+  - 實作位置: `internal/context/claudemd.go`
+  - 特性: 從當前目錄向上搜尋 CLAUDE.md/GEMINI.md
 
 #### Session Storage 會話儲存
 
@@ -188,33 +185,28 @@
 
 | 項目 / Item | 數量 / Count |
 |-------------|-------------|
-| 已完成 / Completed | 15 |
-| 待實作 (P0) / Pending (P0) | 5 主要任務 / main tasks |
+| 已完成 / Completed | 17 |
+| 待實作 (P0) / Pending (P0) | 3 主要任務 / main tasks |
 | 待實作 (P1/P2) / Pending (P1/P2) | 5 主要任務 / main tasks |
-| 完成率 / Completion Rate | ~75% |
+| 完成率 / Completion Rate | ~77% |
 
 ---
 
 ## 🎯 下一步優先順序 / Next Priority Order
 
-### Sprint 2: 環境建構 / Context Building (當前階段 / Current Sprint)
+### Sprint 3: 權限系統 / Permission System (當前階段 / Current Sprint)
 
-1. Context Building / 環境建構 (2-3h)
-2. CLAUDE.md Discovery / CLAUDE.md 發現 (1h)
-
-### Sprint 3: 權限系統 / Permission System
-
-3. Permission System / 權限系統 (4-5h)
-4. Permission Dialog / 權限對話框 (3-4h)
+1. Permission System / 權限系統 (4-5h)
+2. Permission Dialog / 權限對話框 (3-4h)
 
 ### Sprint 4: 會話管理 / Session Management
 
-5. Session Storage / 會話儲存 (3-4h)
-6. Resume Functionality / 恢復功能 (1h)
+3. Session Storage / 會話儲存 (3-4h)
+4. Resume Functionality / 恢復功能 (1h)
 
 ### Sprint 5: TUI 增強 / TUI Enhancement
 
-7. Input Handling /輸入處理 (3-4h)
+5. Input Handling /輸入處理 (3-4h)
 
 ---
 

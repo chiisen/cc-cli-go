@@ -8,6 +8,7 @@ import (
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 
+	envctx "github.com/liao-eli/cc-cli-go/internal/context"
 	"github.com/liao-eli/cc-cli-go/internal/query"
 	"github.com/liao-eli/cc-cli-go/internal/types"
 )
@@ -27,6 +28,8 @@ type Model struct {
 
 	ctx    context.Context
 	cancel context.CancelFunc
+
+	contextInfo *envctx.ContextInfo
 }
 
 func InitialModel() Model {
@@ -41,13 +44,16 @@ func InitialModel() Model {
 
 	ctx, cancel := context.WithCancel(context.Background())
 
+	contextInfo, _ := envctx.BuildContext()
+
 	return Model{
-		input:    ti,
-		viewport: vp,
-		spinner:  s,
-		messages: []*types.Message{},
-		ctx:      ctx,
-		cancel:   cancel,
+		input:       ti,
+		viewport:    vp,
+		spinner:     s,
+		messages:    []*types.Message{},
+		ctx:         ctx,
+		cancel:      cancel,
+		contextInfo: contextInfo,
 	}
 }
 
