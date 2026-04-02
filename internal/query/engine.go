@@ -3,9 +3,11 @@ package query
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"sync"
 
 	"github.com/liao-eli/cc-cli-go/internal/api"
+	"github.com/liao-eli/cc-cli-go/internal/permission"
 	"github.com/liao-eli/cc-cli-go/internal/tools"
 	"github.com/liao-eli/cc-cli-go/internal/types"
 )
@@ -105,7 +107,7 @@ func (e *Engine) runQuery(ctx context.Context, params QueryParams, events chan<-
 			events <- StreamEvent{Type: "message_stop"}
 
 			if len(toolUses) > 0 {
-				toolResults := e.executeTools(ctx, toolUses, params)
+				toolResults := e.executeTools(ctx, toolUses, params, events)
 				_ = toolResults
 			}
 
@@ -115,7 +117,7 @@ func (e *Engine) runQuery(ctx context.Context, params QueryParams, events chan<-
 	}
 }
 
-func (e *Engine) executeTools(ctx context.Context, toolUses []types.ContentBlock, params QueryParams) []*tools.ToolResult {
+func (e *Engine) executeTools(ctx context.Context, toolUses []types.ContentBlock, params QueryParams, events chan<- StreamEvent) []*tools.ToolResult {
 	var wg sync.WaitGroup
 	var mu sync.Mutex
 	results := make([]*tools.ToolResult, len(toolUses))
@@ -135,6 +137,31 @@ func (e *Engine) executeTools(ctx context.Context, toolUses []types.ContentBlock
 			}
 
 			input, _ := toolUse.Input.(map[string]interface{})
+
+			if params.PermissionChecker != nil {
+				decision := params.PermissionChecker.Check(toolUse.Name, input)
+
+				if decision.Behavior == permission.BehaviorDeny {
+					results[idx] = &tools.ToolResult{
+						Content: fmt.Sprintf("Permission denied: %s", decision.Reason),
+						IsError: true,
+					}
+					return
+				}
+
+				if decision.Behavior == permission.BehaviorAsk {
+					events <- StreamEvent{
+						Type: "permission_request",
+						PermissionRequest: &PermissionRequestEvent{
+							ToolName: toolUse.Name,
+							Input:    input,
+							Decision: decision,
+							Index:    idx,
+						},
+					}
+				}
+			}
+
 			result, err := tool.Execute(ctx, input, &tools.ToolContext{})
 			if err != nil {
 				result = &tools.ToolResult{

@@ -9,6 +9,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 
 	envctx "github.com/liao-eli/cc-cli-go/internal/context"
+	"github.com/liao-eli/cc-cli-go/internal/permission"
 	"github.com/liao-eli/cc-cli-go/internal/query"
 	"github.com/liao-eli/cc-cli-go/internal/session"
 	"github.com/liao-eli/cc-cli-go/internal/types"
@@ -32,6 +33,8 @@ type Model struct {
 
 	contextInfo *envctx.ContextInfo
 	session     *session.Session
+	permChecker *permission.Checker
+	permDialog  *PermissionDialog
 }
 
 func InitialModel() Model {
@@ -57,6 +60,7 @@ func InitialModel() Model {
 		cancel:      cancel,
 		contextInfo: contextInfo,
 		session:     session.NewSession(contextInfo.WorkingDir),
+		permChecker: permission.NewChecker(permission.ModeDefault),
 	}
 }
 

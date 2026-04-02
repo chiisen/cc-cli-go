@@ -30,6 +30,11 @@
 - [x] Session Storage / 會話儲存 (JSONL 格式對話持久化)
 - [x] Resume Functionality / 恢復功能 (-c/--continue, --resume <session-id>)
 
+**Phase 1.7: 權限系統 / Permission System**
+
+- [x] Permission System / 權限系統 (工具核准對話框、權限模式、危險命令檢測)
+- [x] Permission Dialog / 權限對話框 (互動式權限 UI、Allow/Deny 選項)
+
 **Phase 2: TUI (基本) / Basic TUI**
 
 - [x] Basic TUI / 基本 TUI (Bubble Tea framework / Bubble Tea 框架)
@@ -63,57 +68,25 @@
 
 #### Permission System 權限系統
 
-- [ ] **Permission System / 權限系統**
+- [x] **Permission System / 權限系統** ✅
   - 功能: Tool approval dialogs / 工具核准對話框
-  - 預估工時 / Est. Hours: 4-5h
-  - 位置: `internal/permission/`
-  - 子任務 / Subtasks:
-    - [ ] Permission modes (default, accept, plan, auto) / 權限模式
-    - [ ] Permission rules (allow, deny, ask) / 權限規則
-    - [ ] Rule matching (tool name + input pattern) / 規則匹配
-    - [ ] Dangerous command detection /危險命令檢測
-
-#### Context Building 環境建構
-
-- [x] **Context Building / 環境建構** ✅
-  - 功能: Build context for API requests / 環境資訊建構
-  - 實作位置: `internal/context/context.go`
-  - 特性: Git 狀態、Git 分支、工作目錄、日期時間
-
-- [x] **CLAUDE.md Discovery / CLAUDE.md 發現** ✅
-  - 功能: Automatic context loading / 自動載入環境
-  - 實作位置: `internal/context/claudemd.go`
-  - 特性: 從當前目錄向上搜尋 CLAUDE.md/GEMINI.md
-
-#### Session Storage 會話儲存
-
-- [x] **Session Storage / 會話儲存** ✅
-  - 功能: Conversation persistence / 對話持久化
-  - 實作位置: `internal/session/session.go`
-  - 特性: Session ID 生成、JSONL 格式儲存、元資料管理、自動清理舊會話
-
-- [x] **Resume Functionality / 恢復功能** ✅
-  - 功能: Continue previous sessions / 繼續之前的會話
-  - 實作位置: `internal/cli/run.go`
-  - CLI flags:
-    - `-c` / `--continue`: Continue last session / 繼續上次會話
-    - `--resume <session-id>`: Resume specific session / 恢復指定會話
-
----
-
-### 🟡 Phase 2: TUI 增強 / TUI Enhancements (P0 - 必要 / Required)
+  - 實作位置: `internal/permission/`
+  - 特性:
+    - Permission modes (default, accept, plan, auto) / 權限模式
+    - Permission rules (allow, deny, ask) / 權限規則
+    - Rule matching (tool name + input pattern) / 規則匹配
+    - Dangerous command detection / 危險命令檢測
 
 #### Permission Dialog 權限對話框
 
-- [ ] **Permission Dialog / 權限對話框**
-  - 功能: Interactive permission UI /互動式權限 UI
-  - 預估工時 / Est. Hours: 3-4h
-  - 位置: `internal/tui/permission.go`
-  - 子任務 / Subtasks:
-    - [ ] Tool use request display / 工具使用請求顯示
-    - [ ] Allow / Deny / Always Allow / Always Deny buttons / 按鈕
-    - [ ] Input preview (file paths, commands) /輸入預覽
-    - [ ] Keyboard navigation / 鍵盤導航
+- [x] **Permission Dialog / 權限對話框** ✅
+  - 功能: Interactive permission UI / 互動式權限 UI
+  - 實作位置: `internal/tui/permission.go`
+  - 特性:
+    - Tool use request display / 工具使用請求顯示
+    - Allow / Deny / Always Allow / Always Deny buttons / 按鈕
+    - Input preview (file paths, commands) / 輸入預覽
+    - Keyboard navigation / 鍵盤導航
 
 #### Input Handling輸入處理
 
@@ -185,23 +158,22 @@
 
 | 項目 / Item | 數量 / Count |
 |-------------|-------------|
-| 已完成 / Completed | 19 |
-| 待實作 (P0) / Pending (P0) | 1 主要任務 / main tasks |
+| 已完成 / Completed | 21 |
+| 待實作 (P0) / Pending (P0) | 0 主要任務 / main tasks |
 | 待實作 (P1/P2) / Pending (P1/P2) | 5 主要任務 / main tasks |
-| 完成率 / Completion Rate | ~79% |
+| 完成率 / Completion Rate | ~81% |
 
 ---
 
 ## 🎯 下一步優先順序 / Next Priority Order
 
-### Sprint 3: 權限系統 / Permission System (當前階段 / Current Sprint)
+### 🎉 P0 任務全部完成 / All P0 Tasks Completed
 
-1. Permission System / 權限系統 (4-5h)
-2. Permission Dialog / 權限對話框 (3-4h)
+恭喜！所有 P0 必要功能已實作完成！
 
-### Sprint 5: TUI 增強 / TUI Enhancement
+### Sprint 5: TUI 增強 / TUI Enhancement (P1 - 可選 / Optional)
 
-3. Input Handling /輸入處理 (3-4h)
+1. Input Handling /輸入處理 (3-4h)
 
 ---
 

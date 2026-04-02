@@ -1,16 +1,18 @@
 package query
 
 import (
+	"github.com/liao-eli/cc-cli-go/internal/permission"
 	"github.com/liao-eli/cc-cli-go/internal/tools"
 	"github.com/liao-eli/cc-cli-go/internal/types"
 )
 
 type QueryParams struct {
-	Messages     []*types.Message
-	SystemPrompt []string
-	Tools        []tools.Tool
-	Model        string
-	MaxTokens    int
+	Messages          []*types.Message
+	SystemPrompt      []string
+	Tools             []tools.Tool
+	Model             string
+	MaxTokens         int
+	PermissionChecker *permission.Checker
 }
 
 type QueryResult struct {
@@ -24,4 +26,13 @@ type StreamEvent struct {
 	Content *types.ContentBlock
 	Delta   string
 	Usage   *types.Usage
+
+	PermissionRequest *PermissionRequestEvent
+}
+
+type PermissionRequestEvent struct {
+	ToolName string
+	Input    map[string]interface{}
+	Decision *permission.Decision
+	Index    int
 }

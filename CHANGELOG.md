@@ -26,6 +26,12 @@
 - **Resume Functionality**: 恢復會話功能，支援 `-c` / `--continue` 繼續上次會話，`--resume <session-id>` 恢復指定會話。
 - **Session Cleanup**: 自動清理舊會話功能。
 
+#### 權限系統 / Permission System
+
+- **Permission System**: 工具核准系統，支援多種權限模式（default、accept、plan、auto）與權限規則（allow、deny、ask）。
+- **Permission Dialog**: 互動式權限對話框，支援 Allow / Deny / Always Allow / Always Deny 選項。
+- **Dangerous Command Detection**: 危險命令檢測功能，自動識別並警告危險操作（如 `rm -rf`、`DROP TABLE`、`git push --force`）。
+
 ## [0.1.0] - 2026-04-01
 
 ### 新增功能 / Added

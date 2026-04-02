@@ -8,12 +8,39 @@ import (
 	"github.com/charmbracelet/lipgloss"
 
 	"github.com/liao-eli/cc-cli-go/internal/api"
+	"github.com/liao-eli/cc-cli-go/internal/permission"
 	"github.com/liao-eli/cc-cli-go/internal/query"
 	"github.com/liao-eli/cc-cli-go/internal/types"
 )
 
 func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	var cmds []tea.Cmd
+
+	if m.permDialog != nil {
+		dialog, cmd := m.permDialog.Update(msg)
+		m.permDialog = &dialog
+
+		if dialog.finished {
+			approved, action := dialog.GetDecision()
+			m.permDialog = nil
+
+			if approved && action == "Always Allow" {
+				m.permChecker.SetRules([]permission.Rule{
+					{ToolName: dialog.toolName, Pattern: "*", Behavior: permission.BehaviorAllow},
+				})
+			}
+
+			if !approved && action == "Always Deny" {
+				m.permChecker.SetRules([]permission.Rule{
+					{ToolName: dialog.toolName, Pattern: "*", Behavior: permission.BehaviorDeny},
+				})
+			}
+
+			return m, m.waitForEvents()
+		}
+
+		return m, cmd
+	}
 
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
@@ -48,6 +75,17 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case StreamEventMsg:
 		event := query.StreamEvent(msg)
+
+		if event.Type == "permission_request" && event.PermissionRequest != nil {
+			dialog := NewPermissionDialog(
+				event.PermissionRequest.ToolName,
+				event.PermissionRequest.Input,
+				event.PermissionRequest.Decision,
+			)
+			m.permDialog = &dialog
+			return m, nil
+		}
+
 		if event.Type == "content_block_delta" && event.Delta != "" {
 			if len(m.messages) > 0 {
 				lastMsg := m.messages[len(m.messages)-1]
@@ -88,6 +126,10 @@ func (m Model) View() string {
 		return "Loading..."
 	}
 
+	if m.permDialog != nil {
+		return m.permDialog.View()
+	}
+
 	var b strings.Builder
 
 	b.WriteString(m.viewport.View())
@@ -123,10 +165,11 @@ func (m Model) submitInput() (tea.Model, tea.Cmd) {
 	m.ctx, m.cancel = context.WithCancel(context.Background())
 
 	params := query.QueryParams{
-		Messages:     m.messages[:len(m.messages)-1],
-		SystemPrompt: []string{"You are a helpful coding assistant.\n\n" + m.contextInfo.ToSystemPrompt()},
-		Model:        api.DefaultModel,
-		MaxTokens:    api.DefaultMaxTokens,
+		Messages:          m.messages[:len(m.messages)-1],
+		SystemPrompt:      []string{"You are a helpful coding assistant.\n\n" + m.contextInfo.ToSystemPrompt()},
+		Model:             api.DefaultModel,
+		MaxTokens:         api.DefaultMaxTokens,
+		PermissionChecker: m.permChecker,
 	}
 
 	m.eventChan, m.resultChan = m.QueryEngine.Query(m.ctx, params)
