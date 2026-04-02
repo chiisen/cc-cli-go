@@ -106,7 +106,7 @@ cc-cli-go/
 - [docs/GO_ARCHITECTURE.md](docs/GO_ARCHITECTURE.md) - Go architecture design and data flow / Go 架構設計與資料流
 - [docs/CORE_FEATURES.md](docs/CORE_FEATURES.md) - Core feature scope and priorities / 核心功能範圍與優先級
 - [docs/TECH_DECISIONS.md](docs/TECH_DECISIONS.md) - ADR-style technical decisions / ADR 形式技術決策
-- [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) - Discussion topics and open questions / 討論題目與待分析問題
+- [docs/OPEN_QUESTIONS.md](docs/OPEN_QUESTIONS.md) - Discussion topics, status tracking, and unfinished items / 討論題目、狀態追蹤與未完成事項
 
 ### Documentation Maintenance Rules / 文件維護規則
 
