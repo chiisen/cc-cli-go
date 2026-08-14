@@ -18,6 +18,7 @@
 - **OPEN_QUESTIONS**: 新增 `docs/OPEN_QUESTIONS.md`，集中整理待分析議題與討論方向。
 - **OPEN_QUESTIONS 擴充**: 新增由 `GO_MODULE_STRUCTURE`、`GO_ARCHITECTURE`、`IMPLEMENTATION_PLAN`、`CORE_FEATURES` 延伸的研究題目。
 - **OPEN_QUESTIONS 狀態整理**: 新增 `待完成事項 / Unfinished Items`，明確標注尚未完成的文件與研究工作。
+- **AI GitHub Project 指南**: 新增 `AI_GITHUB_PROJECT_GUIDE.md`，提供 AI Agent 從規劃文件建立/維護 GitHub Projects v2 看板的標準作業程序 (SOP)，含初始建立、後續更新、欄位管理與常見陷阱說明。
 
 ### 移除 / Removed
 

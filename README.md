@@ -97,6 +97,7 @@ cc-cli-go/
 - [TESTING.md](TESTING.md) - Testing strategy, commands, and best practices / 測試策略、指令與最佳實踐
 - [GIT_REMOTE_SETUP.md](GIT_REMOTE_SETUP.md) - Git remote setup guide / Git 遠端設定指南
 - [.agent_task_state.md](.agent_task_state.md) - Agent task state snapshot / Agent 任務狀態快照
+- [AI_GITHUB_PROJECT_GUIDE.md](AI_GITHUB_PROJECT_GUIDE.md) - SOP for AI agents to import tasks into GitHub Projects v2 / AI Agent 建立與維護 GitHub Projects v2 看板的標準作業程序
 
 ### docs/ Documents / docs 目錄文件
 
